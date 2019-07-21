@@ -147,7 +147,16 @@ def top_chars(phrase):
 
     """
 
-    return []
+    char_count = {}
+
+    # remove all spaces from phrase before iterating
+    for char in phrase.replace(" ", ""):
+        char_count[char] = char_count.get(char, 0) + 1
+
+
+    # Check if each count is highest in dict - if so, add to list, then sort.
+    return sorted([character for character, count in char_count.items() 
+                   if count == max(char_count.values())])
 
 #####################################################################
 # You can ignore everything below this.
