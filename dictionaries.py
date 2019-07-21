@@ -38,7 +38,7 @@ def without_duplicates(words):
         [2, 33333, 111111]
     """
 
-    return []
+    return list(set(words))
 
 
 def find_unique_common_items(items1, items2):
@@ -75,7 +75,7 @@ def find_unique_common_items(items1, items2):
         [2]
     """
 
-    return []
+    return list(set(items1) & set(items2))
 
 
 def get_sum_zero_pairs(numbers):
@@ -105,7 +105,21 @@ def get_sum_zero_pairs(numbers):
         [[-1, 1], [0, 0]]
     """
 
-    return []
+    zero_sum_pairs = []
+
+    # for each num in list, check if it sums to zero with any num in list 
+    # (including itself). If so, add to zero_sum list.
+    for i in range(len(numbers)):
+
+        for num in numbers:
+
+            if numbers[i] + num == 0:
+                # sort pair so identical pairs don't show up in diff order
+                zero_sum_pairs += [sorted([numbers[i], num])]
+
+    # Convert each pair to tuple (immutable) so that list can be converted to
+    # set, isolating unique values. Once isolated, convert back to list.
+    return list(set(tuple(pair) for pair in zero_sum_pairs))
 
 
 def top_chars(phrase):
